@@ -1,25 +1,30 @@
-import  ReactIcon  from './assets/react.svg?component'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import React, { useState } from 'react';
+import './App.css';
+
 
 function App() {
-  // декларативный
-  const currentYear = new Date().getFullYear()
+
 
   return (
-    <div className="App">
-      <div className="logos">
-        {/* 1. React-logo как компонент */}
-        <ReactIcon className="logo-component"/>
-
-        {/* 2. React-logo как обычное <img> */}
-        <img src={reactLogo} className="logo-img" alt="React logo" />
-      </div>
-      <footer>
-        <p>© {currentYear}</p>
-      </footer>
+    <div className="app">
+    <h1 className="page-heading">Ввод значения</h1>
+    <p className="no-margin-text">
+      Текущее значение <code>value</code>: "<output className="current-value"></output>"
+    </p>
+    <div className="error">Введенное значение должно содержать минимум 3 символа</div>
+    <div className="buttons-container">
+      <button className="button">Ввести новое</button>
+      <button className="button" disabled>Добавить в список</button>
     </div>
-  )
+    <div className="list-container">
+      <h2 className="list-heading">Список:</h2>
+      <p className="no-margin-text">Нет добавленных элементов</p>
+      <ul className="list">
+        <li className="list-item">Первый элемент</li>
+      </ul>
+    </div>
+  </div>
+  );
 }
 
-export default App
+export default App;
