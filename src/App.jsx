@@ -1,12 +1,38 @@
+import { useState } from 'react';
 import styles from './app.module.css';
 import data from './data.json';
 
 export const App = () => {
 	// Можно задать 2 состояния — steps и activeIndex
 
+	const [steps, setSteps] = useState(data);
+	const [activeIndex, setActiveIndex] = useState(4);
+
 	// И определить 3 обработчика: Клик назад, Клик вперед, Начать сначала
+	const handlePrevClick = () => {
+		setActiveIndex((prev) => {
+			console.log('prev', prev);
+			if (prev > 0) return prev - 1;
+			return 0;
+		});
+	};
+
+	const handleNextClick = () => {
+		setActiveIndex((prev) => {
+			console.log('next prev', prev);
+			if (prev < data.length - 1) return prev + 1;
+			return prev;
+		});
+	};
+
+	const handleRestartClick = () => {
+		setActiveIndex(0);
+	};
 
 	// И 2 переменных-флага — находимся ли мы на первом шаге, и находимся ли на последнем
+
+	const isFirstStep = activeIndex === 0;
+	const isLastStep = activeIndex === steps.length - 1;
 
 	return (
 		<div className={styles.container}>
@@ -47,12 +73,21 @@ export const App = () => {
 						</li>
 					</ul>
 					<div className={styles['buttons-container']}>
-						<button className={styles.button}>Назад</button>
-						<button className={styles.button}>
-							Далее
-							{/* "Начать сначала", можно сделать этой же кнопкой, просто подменять обработчик и текст в зависимости от условия */}
-							{/* Или заменять всю кнопку в зависимости от условия */}
+						<button className={styles.button} onClick={handlePrevClick}>
+							Назад
 						</button>
+						{isLastStep ? (
+							<button
+								className={styles.button}
+								onClick={handleRestartClick}
+							>
+								Начать сначала
+							</button>
+						) : (
+							<button className={styles.button} onClick={handleNextClick}>
+								Далее
+							</button>
+						)}
 					</div>
 				</div>
 			</div>
