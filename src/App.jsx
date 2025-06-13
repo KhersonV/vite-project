@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './App.css';
 
 function App() {
@@ -9,12 +9,29 @@ function App() {
 
 	const onInputButtonClick = () => {
 		setError('');
+		setValue(false);
 		const promptValue = prompt('Введите значение');
 		if (promptValue !== null) {
 			setNewValue(promptValue);
 			if (promptValue.length < 3)
 				setError('Введенное значение должно содержать минимум 3 символа');
+			else {
+				setValue(true);
+			}
 		}
+	};
+
+	const onAddButtonClick = () => {
+		console.log('onAddButtonClick');
+
+		const newItem = {
+			id: Date.now(),
+			value: newValue,
+		};
+
+		setList((prevList) => [...prevList, newItem]);
+		setNewValue('');
+		setValue(false);
 	};
 
 	return (
@@ -31,15 +48,25 @@ function App() {
 				<button className="button" onClick={onInputButtonClick}>
 					Ввести новое
 				</button>
-				<button className="button" disabled={!isValueVaild}>
+				<button
+					className="button"
+					disabled={!isValueVaild}
+					onClick={onAddButtonClick}
+				>
 					Добавить в список
 				</button>
 			</div>
 			<div className="list-container">
 				<h2 className="list-heading">Список:</h2>
-				<p className="no-margin-text">Нет добавленных элементов</p>
+				{list.length == 0 && (
+					<p className="no-margin-text">Нет добавленных элементов</p>
+				)}
 				<ul className="list">
-					<li className="list-item">Первый элемент</li>
+					{list.map((x) => (
+						<li key={x.id} className="list-item">
+							{x.value}
+						</li>
+					))}
 				</ul>
 			</div>
 		</div>
