@@ -1,20 +1,42 @@
-import ReactIcon from './assets/react.svg?component';
-import reactLogo from './assets/react.svg';
-import './App.css';
+import { useState } from 'react';
+import styles from './App.module.css';
+import data from './data.json';
+
 
 function App() {
-	// декларативный
+
 	const currentYear = new Date().getFullYear();
 
-	return (
-		<div className="App">
-			<div className="logos">
-				{/* 1. React-logo как компонент */}
-				<ReactIcon className="logo-component" />
+	const buttons = data.buttons;
 
-				{/* 2. React-logo как обычное <img> */}
-				<img src={reactLogo} className="logo-img" alt="React logo" />
+	const handleClick  = (btn) => {
+		console.log(btn.value)
+	}
+
+	return (
+		<div className={styles.app}>
+			<div className={styles.container}>
+				<div className={styles.display}>0</div>
+				<div className={styles.buttonContainer}>
+					{buttons.map((btn) => (
+						<button
+							key={btn.id}
+							className={[
+								styles.button,
+								btn.type === 'clear' && styles.clear,
+								btn.type === 'operator' && styles.operator,
+								btn.type === 'equal' && styles.equal,
+							]
+								.filter(Boolean)
+								.join(' ')}
+							onClick={() => handleClick(btn)}
+						>
+							{btn.value}
+						</button>
+					))}
+				</div>
 			</div>
+
 			<footer>
 				<p>© {currentYear}</p>
 			</footer>

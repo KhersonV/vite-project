@@ -1,0 +1,20 @@
+{
+  "buttons": [
+    { "id": 1, "value": "C", "type": "clear" },
+    { "id": 2,  "value": "7", "type": "digit" },
+    { "id": 3,  "value": "8", "type": "digit" },
+    { "id": 4,  "value": "9", "type": "digit" },
+    { "id": 5, "value": "/", "type": "operator" },
+    { "id": 6,  "value": "4", "type": "digit" },
+    { "id": 7,  "value": "5", "type": "digit" },
+    { "id": 8,  "value": "6", "type": "digit" },
+    { "id": 9, "value": "*", "type": "operator" },
+    { "id": 10,  "value": "1", "type": "digit" },
+    { "id": 11,  "value": "2", "type": "digit" },
+    { "id": 12,  "value": "3", "type": "digit" },
+    { "id": 13, "value": "-", "type": "operator" },
+    { "id": 14, "value": "+", "type": "operator" },
+    { "id": 15, "value": "0", "type": "digit" },
+    { "id": 16, "value": "=", "type": "equal" }
+  ]
+}
