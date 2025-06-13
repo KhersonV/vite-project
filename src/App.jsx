@@ -1,70 +1,69 @@
 import { useState } from 'react';
-import './App.css';
+import styles from './app.module.css';
 
 function App() {
-	const [isValueVaild, setValue] = useState(false);
+	const [isValueValid, setValueValid] = useState(false);
 	const [newValue, setNewValue] = useState('');
 	const [list, setList] = useState([]);
 	const [error, setError] = useState('');
 
 	const onInputButtonClick = () => {
 		setError('');
-		setValue(false);
+		setValueValid(false);
+
 		const promptValue = prompt('Введите значение');
 		if (promptValue !== null) {
 			setNewValue(promptValue);
-			if (promptValue.length < 3)
+			if (promptValue.length < 3) {
 				setError('Введенное значение должно содержать минимум 3 символа');
-			else {
-				setValue(true);
+			} else {
+				setValueValid(true);
 			}
 		}
 	};
 
 	const onAddButtonClick = () => {
-		console.log('onAddButtonClick');
-
 		const newItem = {
 			id: Date.now(),
 			value: newValue,
 		};
-
-		setList((prevList) => [...prevList, newItem]);
+		setList((prev) => [...prev, newItem]);
 		setNewValue('');
-		setValue(false);
+		setValueValid(false);
 	};
 
 	return (
-		<div className="app">
-			<h1 className="page-heading">Ввод значения</h1>
-			<p className="no-margin-text">
-				Текущее значение <code>value</code>: "
-				<output className="current-value">{newValue}</output>"
+		<div className={styles.app}>
+			<h1 className={styles.pageHeading}>Ввод значения</h1>
+			<p className={styles.noMarginText}>
+				Текущее значение <code>value</code>:&nbsp;
+				<output className={styles.currentValue}>{newValue}</output>
 			</p>
 
-			{error && <div className="error">{error}</div>}
+			{error && <div className={styles.error}>{error}</div>}
 
-			<div className="buttons-container">
-				<button className="button" onClick={onInputButtonClick}>
+			<div className={styles.buttonsContainer}>
+				<button className={styles.button} onClick={onInputButtonClick}>
 					Ввести новое
 				</button>
 				<button
-					className="button"
-					disabled={!isValueVaild}
+					className={styles.button}
+					disabled={!isValueValid}
 					onClick={onAddButtonClick}
 				>
 					Добавить в список
 				</button>
 			</div>
-			<div className="list-container">
-				<h2 className="list-heading">Список:</h2>
-				{list.length == 0 && (
-					<p className="no-margin-text">Нет добавленных элементов</p>
+
+			<div className={styles.listContainer}>
+				<h2 className={styles.listHeading}>Список:</h2>
+				{list.length === 0 && (
+					<p className={styles.noMarginText}>Нет добавленных элементов</p>
 				)}
-				<ul className="list">
-					{list.map((x) => (
-						<li key={x.id} className="list-item">
-							{x.value}
+				<ul className={styles.list}>
+					{list.map((item) => (
+						<li key={item.id} className={styles.listItem}>
+							{item.value}
 						</li>
 					))}
 				</ul>
