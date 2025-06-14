@@ -9,14 +9,19 @@ function App() {
 
 	const buttons = data.buttons;
 
+	const [operand1, setOperand1] = useState("")
+
 	const handleClick  = (btn) => {
-		console.log(btn.value)
+		if(operand1)
+			setOperand1(operand1 + btn.value);
+		else
+			setOperand1(btn.value);
 	}
 
 	return (
 		<div className={styles.app}>
 			<div className={styles.container}>
-				<div className={styles.display}>0</div>
+				<div className={styles.display}>{operand1 || 0 }</div>
 				<div className={styles.buttonContainer}>
 					{buttons.map((btn) => (
 						<button
