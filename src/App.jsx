@@ -67,7 +67,13 @@ function App() {
 	return (
 		<div className={styles.app}>
 			<div className={styles.container}>
-				<div className={styles.display}>{displayText}</div>
+				<div
+					className={[styles.display, isResult && styles.result]
+						.filter(Boolean)
+						.join(' ')}
+				>
+					{displayText || '0'}
+				</div>
 				<div className={styles.buttonContainer}>
 					{buttons.map((btn) => (
 						<button

@@ -45,6 +45,10 @@ footer {
   overflow-x: auto;
 }
 
+.result {
+  color: rgb(0, 229, 255);
+}
+
 .buttonContainer {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
